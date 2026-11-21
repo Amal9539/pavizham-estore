@@ -6,10 +6,10 @@ export declare class UsersService {
     createUser(data: CreateUserDto): Promise<{
         message: string;
         user: {
-            id: string;
             name: string;
             email: string;
             phone: string | null;
+            id: string;
             role: import("../../generated/prisma/enums.js").UserRole;
             createdAt: Date;
         };
@@ -17,10 +17,10 @@ export declare class UsersService {
     getProfile(userId: string): Promise<{
         message: string;
         user: {
-            id: string;
             name: string;
             email: string;
             phone: string | null;
+            id: string;
             role: import("../../generated/prisma/enums.js").UserRole;
             isActive: boolean;
             createdAt: Date;

@@ -23,7 +23,7 @@ AuthModule = __decorate([
         ],
         controllers: [AuthController],
         providers: [AuthService, AccessTokenGuard],
-        exports: [AuthService, AccessTokenGuard],
+        exports: [JwtModule, AuthService, AccessTokenGuard],
     })
 ], AuthModule);
 export { AuthModule };

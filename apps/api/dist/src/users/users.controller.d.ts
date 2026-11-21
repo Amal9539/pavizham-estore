@@ -14,10 +14,10 @@ export declare class UsersController {
     register(body: CreateUserDto): Promise<{
         message: string;
         user: {
-            id: string;
             name: string;
             email: string;
             phone: string | null;
+            id: string;
             role: import("../../generated/prisma/enums.js").UserRole;
             createdAt: Date;
         };
@@ -25,10 +25,10 @@ export declare class UsersController {
     getProfile(request: AuthenticatedRequest): Promise<{
         message: string;
         user: {
-            id: string;
             name: string;
             email: string;
             phone: string | null;
+            id: string;
             role: import("../../generated/prisma/enums.js").UserRole;
             isActive: boolean;
             createdAt: Date;
