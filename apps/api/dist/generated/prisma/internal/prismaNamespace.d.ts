@@ -737,6 +737,7 @@ export declare const UserScalarFieldEnum: {
     readonly name: "name";
     readonly email: "email";
     readonly passwordHash: "passwordHash";
+    readonly refreshTokenHash: "refreshTokenHash";
     readonly phone: "phone";
     readonly role: "role";
     readonly isActive: "isActive";
