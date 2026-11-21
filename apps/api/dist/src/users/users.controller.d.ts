@@ -2,6 +2,7 @@ import type { Request } from 'express';
 import { UsersService } from './users.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateProfileDto } from './dto/update-profile.dto.js';
+import { CreateAddressDto } from './dto/create-address.dto.js';
 type AuthenticatedRequest = Request & {
     user: {
         sub: string;
@@ -45,6 +46,21 @@ export declare class UsersController {
             role: import("../../generated/prisma/enums.js").UserRole;
             isActive: boolean;
             createdAt: Date;
+        };
+    }>;
+    createAddress(request: AuthenticatedRequest, body: CreateAddressDto): Promise<{
+        message: string;
+        address: {
+            id: string;
+            phone: string;
+            createdAt: Date;
+            fullName: string;
+            address: string;
+            city: string;
+            state: string;
+            postalCode: string;
+            country: string;
+            userId: string;
         };
     }>;
 }

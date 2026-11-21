@@ -9,6 +9,7 @@ import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import * as argon2 from 'argon2';
 import { UpdateProfileDto } from './dto/update-profile.dto.js';
+import { CreateAddressDto } from './dto/create-address.dto.js';
 
 @Injectable()
 export class UsersService {
@@ -95,6 +96,25 @@ async updateProfile(userId: string, data: UpdateProfileDto) {
   return {
     message: 'Profile updated successfully',
     user,
+  };
+}
+async createAddress(userId: string, data: CreateAddressDto) {
+  const address = await this.prisma.address.create({
+    data: {
+      userId,
+      fullName: data.fullName,
+      phone: data.phone,
+      address: data.address,
+      city: data.city,
+      state: data.state,
+      postalCode: data.postalCode,
+      country: data.country ?? 'India',
+    },
+  });
+
+  return {
+    message: 'Address added successfully',
+    address,
   };
 }
 }

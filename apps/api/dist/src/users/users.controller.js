@@ -15,6 +15,7 @@ import { UsersService } from './users.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { AccessTokenGuard } from '../auth/guards/access-token.guard.js';
 import { UpdateProfileDto } from './dto/update-profile.dto.js';
+import { CreateAddressDto } from './dto/create-address.dto.js';
 let UsersController = class UsersController {
     usersService;
     constructor(usersService) {
@@ -28,6 +29,9 @@ let UsersController = class UsersController {
     }
     async updateProfile(request, body) {
         return this.usersService.updateProfile(request.user.sub, body);
+    }
+    async createAddress(request, body) {
+        return this.usersService.createAddress(request.user.sub, body);
     }
 };
 __decorate([
@@ -54,6 +58,15 @@ __decorate([
     __metadata("design:paramtypes", [Object, UpdateProfileDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "updateProfile", null);
+__decorate([
+    UseGuards(AccessTokenGuard),
+    Post('addresses'),
+    __param(0, Req()),
+    __param(1, Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, CreateAddressDto]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "createAddress", null);
 UsersController = __decorate([
     Controller('users'),
     __metadata("design:paramtypes", [UsersService])

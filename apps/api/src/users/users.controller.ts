@@ -14,6 +14,7 @@ import { UsersService } from './users.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { AccessTokenGuard } from '../auth/guards/access-token.guard.js';
 import { UpdateProfileDto } from './dto/update-profile.dto.js';
+import { CreateAddressDto } from './dto/create-address.dto.js';
 
 type AuthenticatedRequest = Request & {
   user: {
@@ -44,5 +45,13 @@ async updateProfile(
   @Body() body: UpdateProfileDto,
 ) {
   return this.usersService.updateProfile(request.user.sub, body);
+}
+@UseGuards(AccessTokenGuard)
+@Post('addresses')
+async createAddress(
+  @Req() request: AuthenticatedRequest,
+  @Body() body: CreateAddressDto,
+) {
+  return this.usersService.createAddress(request.user.sub, body);
 }
 }

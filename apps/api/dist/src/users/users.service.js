@@ -91,6 +91,24 @@ let UsersService = class UsersService {
             user,
         };
     }
+    async createAddress(userId, data) {
+        const address = await this.prisma.address.create({
+            data: {
+                userId,
+                fullName: data.fullName,
+                phone: data.phone,
+                address: data.address,
+                city: data.city,
+                state: data.state,
+                postalCode: data.postalCode,
+                country: data.country ?? 'India',
+            },
+        });
+        return {
+            message: 'Address added successfully',
+            address,
+        };
+    }
 };
 UsersService = __decorate([
     Injectable(),

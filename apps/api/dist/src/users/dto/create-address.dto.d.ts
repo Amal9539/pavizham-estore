@@ -1,11 +1,9 @@
 export declare class CreateAddressDto {
     fullName: string;
     phone: string;
-    addressLine1: string;
-    addressLine2?: string;
+    address: string;
     city: string;
     state: string;
     postalCode: string;
-    country: string;
-    isDefault?: boolean;
+    country?: string;
 }

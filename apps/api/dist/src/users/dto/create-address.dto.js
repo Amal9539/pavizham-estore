@@ -7,17 +7,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsString, IsNotEmpty, IsOptional, MaxLength, IsBoolean, } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, MaxLength, } from 'class-validator';
 export class CreateAddressDto {
     fullName;
     phone;
-    addressLine1;
-    addressLine2;
+    address;
     city;
     state;
     postalCode;
     country;
-    isDefault;
 }
 __decorate([
     IsString(),
@@ -36,13 +34,7 @@ __decorate([
     IsNotEmpty(),
     MaxLength(255),
     __metadata("design:type", String)
-], CreateAddressDto.prototype, "addressLine1", void 0);
-__decorate([
-    IsOptional(),
-    IsString(),
-    MaxLength(255),
-    __metadata("design:type", String)
-], CreateAddressDto.prototype, "addressLine2", void 0);
+], CreateAddressDto.prototype, "address", void 0);
 __decorate([
     IsString(),
     IsNotEmpty(),
@@ -62,14 +54,9 @@ __decorate([
     __metadata("design:type", String)
 ], CreateAddressDto.prototype, "postalCode", void 0);
 __decorate([
+    IsOptional(),
     IsString(),
-    IsNotEmpty(),
     MaxLength(100),
     __metadata("design:type", String)
 ], CreateAddressDto.prototype, "country", void 0);
-__decorate([
-    IsOptional(),
-    IsBoolean(),
-    __metadata("design:type", Boolean)
-], CreateAddressDto.prototype, "isDefault", void 0);
 //# sourceMappingURL=create-address.dto.js.map
