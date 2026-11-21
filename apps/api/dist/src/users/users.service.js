@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable, ConflictException, } from '@nestjs/common';
+import { Injectable, ConflictException, NotFoundException, } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
 import * as argon2 from 'argon2';
 let UsersService = class UsersService {
@@ -45,6 +45,27 @@ let UsersService = class UsersService {
         });
         return {
             message: 'Registration successful',
+            user,
+        };
+    }
+    async getProfile(userId) {
+        const user = await this.prisma.user.findUnique({
+            where: { id: userId },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                phone: true,
+                role: true,
+                isActive: true,
+                createdAt: true,
+            },
+        });
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+        return {
+            message: 'Profile retrieved successfully',
             user,
         };
     }
