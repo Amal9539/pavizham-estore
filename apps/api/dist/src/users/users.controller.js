@@ -10,10 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Body, Controller, Post, Get, UseGuards, Req, } from '@nestjs/common';
+import { Body, Controller, Post, Get, Patch, UseGuards, Req, } from '@nestjs/common';
 import { UsersService } from './users.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { AccessTokenGuard } from '../auth/guards/access-token.guard.js';
+import { UpdateProfileDto } from './dto/update-profile.dto.js';
 let UsersController = class UsersController {
     usersService;
     constructor(usersService) {
@@ -24,6 +25,9 @@ let UsersController = class UsersController {
     }
     async getProfile(request) {
         return this.usersService.getProfile(request.user.sub);
+    }
+    async updateProfile(request, body) {
+        return this.usersService.updateProfile(request.user.sub, body);
     }
 };
 __decorate([
@@ -41,6 +45,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getProfile", null);
+__decorate([
+    UseGuards(AccessTokenGuard),
+    Patch('me'),
+    __param(0, Req()),
+    __param(1, Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, UpdateProfileDto]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "updateProfile", null);
 UsersController = __decorate([
     Controller('users'),
     __metadata("design:paramtypes", [UsersService])

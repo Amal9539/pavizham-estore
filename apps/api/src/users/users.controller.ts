@@ -3,6 +3,7 @@ import {
   Controller,
   Post,
   Get,
+  Patch,
   UseGuards,
   Req,
 } from '@nestjs/common';
@@ -12,6 +13,7 @@ import type { Request } from 'express';
 import { UsersService } from './users.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { AccessTokenGuard } from '../auth/guards/access-token.guard.js';
+import { UpdateProfileDto } from './dto/update-profile.dto.js';
 
 type AuthenticatedRequest = Request & {
   user: {
@@ -35,4 +37,12 @@ export class UsersController {
   async getProfile(@Req() request: AuthenticatedRequest) {
     return this.usersService.getProfile(request.user.sub);
   }
+  @UseGuards(AccessTokenGuard)
+@Patch('me')
+async updateProfile(
+  @Req() request: AuthenticatedRequest,
+  @Body() body: UpdateProfileDto,
+) {
+  return this.usersService.updateProfile(request.user.sub, body);
+}
 }
