@@ -54,4 +54,9 @@ async createAddress(
 ) {
   return this.usersService.createAddress(request.user.sub, body);
 }
+@UseGuards(AccessTokenGuard)
+@Get('addresses')
+async getAddresses(@Req() request: AuthenticatedRequest) {
+  return this.usersService.getAddresses(request.user.sub);
+}
 }

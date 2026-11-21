@@ -117,4 +117,19 @@ async createAddress(userId: string, data: CreateAddressDto) {
     address,
   };
 }
+async getAddresses(userId: string) {
+  const addresses = await this.prisma.address.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+
+  return {
+    message: 'Addresses retrieved successfully',
+    addresses,
+  };
+}
 }

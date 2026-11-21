@@ -33,6 +33,9 @@ let UsersController = class UsersController {
     async createAddress(request, body) {
         return this.usersService.createAddress(request.user.sub, body);
     }
+    async getAddresses(request) {
+        return this.usersService.getAddresses(request.user.sub);
+    }
 };
 __decorate([
     Post('register'),
@@ -67,6 +70,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, CreateAddressDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "createAddress", null);
+__decorate([
+    UseGuards(AccessTokenGuard),
+    Get('addresses'),
+    __param(0, Req()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getAddresses", null);
 UsersController = __decorate([
     Controller('users'),
     __metadata("design:paramtypes", [UsersService])

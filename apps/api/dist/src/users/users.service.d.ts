@@ -55,4 +55,19 @@ export declare class UsersService {
             userId: string;
         };
     }>;
+    getAddresses(userId: string): Promise<{
+        message: string;
+        addresses: {
+            id: string;
+            phone: string;
+            createdAt: Date;
+            fullName: string;
+            address: string;
+            city: string;
+            state: string;
+            postalCode: string;
+            country: string;
+            userId: string;
+        }[];
+    }>;
 }

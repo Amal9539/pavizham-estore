@@ -63,5 +63,20 @@ export declare class UsersController {
             userId: string;
         };
     }>;
+    getAddresses(request: AuthenticatedRequest): Promise<{
+        message: string;
+        addresses: {
+            id: string;
+            phone: string;
+            createdAt: Date;
+            fullName: string;
+            address: string;
+            city: string;
+            state: string;
+            postalCode: string;
+            country: string;
+            userId: string;
+        }[];
+    }>;
 }
 export {};

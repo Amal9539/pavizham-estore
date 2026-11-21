@@ -109,6 +109,20 @@ let UsersService = class UsersService {
             address,
         };
     }
+    async getAddresses(userId) {
+        const addresses = await this.prisma.address.findMany({
+            where: {
+                userId,
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
+        return {
+            message: 'Addresses retrieved successfully',
+            addresses,
+        };
+    }
 };
 UsersService = __decorate([
     Injectable(),
