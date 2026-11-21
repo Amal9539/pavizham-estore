@@ -8,6 +8,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import * as argon2 from 'argon2';
+import { UpdateProfileDto } from './dto/update-profile.dto.js';
 
 @Injectable()
 export class UsersService {
@@ -70,6 +71,29 @@ export class UsersService {
 
   return {
     message: 'Profile retrieved successfully',
+    user,
+  };
+}
+async updateProfile(userId: string, data: UpdateProfileDto) {
+  const user = await this.prisma.user.update({
+    where: { id: userId },
+    data: {
+      name: data.name,
+      phone: data.phone,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      role: true,
+      isActive: true,
+      createdAt: true,
+    },
+  });
+
+  return {
+    message: 'Profile updated successfully',
     user,
   };
 }

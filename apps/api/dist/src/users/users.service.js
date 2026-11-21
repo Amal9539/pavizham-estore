@@ -69,6 +69,28 @@ let UsersService = class UsersService {
             user,
         };
     }
+    async updateProfile(userId, data) {
+        const user = await this.prisma.user.update({
+            where: { id: userId },
+            data: {
+                name: data.name,
+                phone: data.phone,
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                phone: true,
+                role: true,
+                isActive: true,
+                createdAt: true,
+            },
+        });
+        return {
+            message: 'Profile updated successfully',
+            user,
+        };
+    }
 };
 UsersService = __decorate([
     Injectable(),
