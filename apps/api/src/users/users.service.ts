@@ -10,6 +10,7 @@ import { CreateUserDto } from './dto/create-user.dto.js';
 import * as argon2 from 'argon2';
 import { UpdateProfileDto } from './dto/update-profile.dto.js';
 import { CreateAddressDto } from './dto/create-address.dto.js';
+import { UpdateAddressDto } from './dto/update-address.dto.js';
 
 @Injectable()
 export class UsersService {
@@ -130,6 +131,35 @@ async getAddresses(userId: string) {
   return {
     message: 'Addresses retrieved successfully',
     addresses,
+  };
+}
+async updateAddress(
+  userId: string,
+  addressId: string,
+  data: UpdateAddressDto,
+) {
+  const result = await this.prisma.address.updateMany({
+    where: {
+      id: addressId,
+      userId,
+    },
+    data,
+  });
+
+  if (result.count === 0) {
+    throw new NotFoundException('Address not found');
+  }
+
+  const address = await this.prisma.address.findFirst({
+    where: {
+      id: addressId,
+      userId,
+    },
+  });
+
+  return {
+    message: 'Address updated successfully',
+    address,
   };
 }
 }

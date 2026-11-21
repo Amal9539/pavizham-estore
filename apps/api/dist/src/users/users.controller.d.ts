@@ -3,6 +3,7 @@ import { UsersService } from './users.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateProfileDto } from './dto/update-profile.dto.js';
 import { CreateAddressDto } from './dto/create-address.dto.js';
+import { UpdateAddressDto } from './dto/update-address.dto.js';
 type AuthenticatedRequest = Request & {
     user: {
         sub: string;
@@ -77,6 +78,21 @@ export declare class UsersController {
             country: string;
             userId: string;
         }[];
+    }>;
+    updateAddress(request: AuthenticatedRequest, addressId: string, body: UpdateAddressDto): Promise<{
+        message: string;
+        address: {
+            id: string;
+            phone: string;
+            createdAt: Date;
+            fullName: string;
+            address: string;
+            city: string;
+            state: string;
+            postalCode: string;
+            country: string;
+            userId: string;
+        } | null;
     }>;
 }
 export {};

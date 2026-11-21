@@ -2,6 +2,7 @@ import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateProfileDto } from './dto/update-profile.dto.js';
 import { CreateAddressDto } from './dto/create-address.dto.js';
+import { UpdateAddressDto } from './dto/update-address.dto.js';
 export declare class UsersService {
     private prisma;
     constructor(prisma: PrismaService);
@@ -69,5 +70,20 @@ export declare class UsersService {
             country: string;
             userId: string;
         }[];
+    }>;
+    updateAddress(userId: string, addressId: string, data: UpdateAddressDto): Promise<{
+        message: string;
+        address: {
+            id: string;
+            phone: string;
+            createdAt: Date;
+            fullName: string;
+            address: string;
+            city: string;
+            state: string;
+            postalCode: string;
+            country: string;
+            userId: string;
+        } | null;
     }>;
 }

@@ -123,6 +123,28 @@ let UsersService = class UsersService {
             addresses,
         };
     }
+    async updateAddress(userId, addressId, data) {
+        const result = await this.prisma.address.updateMany({
+            where: {
+                id: addressId,
+                userId,
+            },
+            data,
+        });
+        if (result.count === 0) {
+            throw new NotFoundException('Address not found');
+        }
+        const address = await this.prisma.address.findFirst({
+            where: {
+                id: addressId,
+                userId,
+            },
+        });
+        return {
+            message: 'Address updated successfully',
+            address,
+        };
+    }
 };
 UsersService = __decorate([
     Injectable(),
